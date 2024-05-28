@@ -107,8 +107,8 @@ footer .redes-sociales ul li a {
 /* Estilos específicos para las noticias */
 
 /* Estilo de cada noticia */
-.noticia, .post {
-    background-color: #fff; /* Fondo blanco para las noticias */
+.noticia, .post, .clima {
+    background-color: #fff; /* Fondo blanco para las noticias y clima */
     padding: 20px; /* Espaciado interno */
     border-radius: 5px; /* Bordes redondeados para una apariencia más suave */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
@@ -139,4 +139,21 @@ a {
 
 a:hover {
     color: #ffcc00; /* Cambio de color al pasar el mouse */
+}
+
+/* Estilos para la sección del clima */
+section#clima {
+    background-color: #e0f7fa; /* Fondo suave para la sección del clima */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 20px; /* Espaciado interno */
+}
+
+.clima h3 {
+    margin: 0; /* Elimina el margen */
+    color: #00796b; /* Color del texto */
+}
+
+.clima p {
+    margin: 10px 0; /* Espaciado vertical */
+    color: #004d40; /* Color del texto */
 }
