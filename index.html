@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Ronaldo Najera">
+    <meta name="Pablo Lucero">
+    <meta name="Anibal Trigueros">
+    <meta name="Mauricio Figueroa">
+    <title>INFINITY NEWS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <img src="Imagenes/Logo.jpg">
+    </div>
+    <div class="brand">
+        <h1>INFINITY NEWS</h1>
+        <p>El Universo de Información a tu Alcance...</p>
+    </div>
+    <div class="botones-menu">
+        <button onclick="scrollToSection('Inicio')">Inicio</button>
+        <button onclick="scrollToSection('deportes')">Deportes</button>
+        <button onclick="scrollToSection('tecnologia')">Tecnología</button>
+        <button onclick="scrollToSection('cine')">Cine</button>
+        <button onclick="scrollToSection('entretenimiento')">Entretenimiento</button>
+        <button onclick="scrollToSection('reddit')">Reddit</button>
+    </div>
+</header>
+
+<main>
+    <!-- Sección para mostrar noticias de inicio -->
+    <section id="Inicio">
+        <h2>Inicio</h2>
+        <p>Descubre las últimas noticias y novedades aquí. ¡No te lo pierdas!</p>
+        <!-- Contenido de inicio -->
+    </section>
+
+    <!-- Sección para mostrar noticias de deportes -->
+    <section id="deportes">
+        <h2>Deportes</h2>
+        <p>Todo sobre el mundo del deporte. ¡Mantente al tanto de los eventos más importantes!</p>
+        <div id="deportesNoticias" class="noticias-container">
+            <!-- Contenido de noticias de deportes -->
+        </div>
+    </section>
+
+    <!-- Sección para mostrar noticias de tecnología -->
+    <section id="tecnologia">
+        <h2>Tecnología</h2>
+        <p>Explora las últimas innovaciones tecnológicas y tendencias del mundo digital.</p>
+        <div id="tecnologiaNoticias" class="noticias-container">
+            <!-- Contenido de noticias de tecnología -->
+        </div>
+    </section>
+
+    <!-- Sección para mostrar noticias de cine -->
+    <section id="cine">
+        <h2>Cine</h2>
+        <p>Entérate de las últimas películas, estrenos, y novedades del séptimo arte.</p>
+        <div id="cineNoticias" class="noticias-container">
+            <!-- Contenido de noticias de cine -->
+        </div>
+    </section>
+
+    <!-- Sección para mostrar noticias de entretenimiento -->
+    <section id="entretenimiento">
+        <h2>Entretenimiento</h2>
+        <p>Sumérgete en el mundo del entretenimiento con las noticias más interesantes y curiosas.</p>
+        <div id="entretenimientoNoticias" class="noticias-container">
+            <!-- Contenido de noticias de entretenimiento -->
+        </div>
+    </section>
+
+    <!-- Sección para mostrar noticias de Reddit -->
+    <section id="reddit">
+        <h2>Reddit</h2>
+        <p>Explora el universo de Reddit con las publicaciones más populares y curiosas.</p>
+        <div id="redditNoticias" class="noticias-container">
+            <!-- Contenido de noticias de Reddit -->
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div id="contacto">
+        <h3>Contactos</h3>
+        <p>Teléfono: 7980-5469</p>
+        <p>Correo electrónico: construcOriente@gmail.com.gt</p>
+    </div>
+    <div class="redes-sociales">
+        <h3>Síguenos en redes sociales:</h3>
+        <ul>
+            <li><a href="https://www.facebook.com">Facebook</a></li>
+            <li><a href="https://twitter.com">Twitter</a></li>
+            <li><a href="https://www.instagram.com">Instagram</a></li>
+            <li><a href="https://www.tiktok.com/es/">Tik tok</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script>
+    // Función para hacer scroll hacia la sección correspondiente
+    function scrollToSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Función para cargar noticias desde la API de News
+    function cargarNoticias(categoria, contenedorId) {
+        fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${categoria}&apiKey=your-news-api-key`)
+            .then(response => response.json())
+            .then(data => {
+                const noticias = data.articles;
+                const contenedor = document.getElementById(contenedorId);
+
+                contenedor.innerHTML = ''; // Limpiar el contenedor antes de cargar nuevas noticias
+
+                noticias.forEach(noticia => {
+                    const noticiaElemento = document.createElement('div');
+                    noticiaElemento.classList.add('noticia');
+                    noticiaElemento.innerHTML = `
+                        <h3>${noticia.title}</h3>
+                        <p>${noticia.description}</p>
+                        <a href="${noticia.url}" target="_blank">Leer más</a>
+                    `;
+                    contenedor.appendChild(noticiaElemento);
+                });
+            })
+            .catch(error => console.error('Error al cargar noticias:', error));
+    }
+
+    // Cargar noticias al cargar la página
+    window.addEventListener('load', () => {
+        cargarNoticias('sports', 'deportesNoticias'); // Cargar noticias de deportes al inicio
+        cargarNoticias('technology', 'tecnologiaNoticias'); // Cargar noticias de tecnología al inicio
+        // Puedes cargar más categorías aquí si lo deseas
+    });
+
+    // Cargar noticias de Reddit
+    function cargarNoticiasReddit(subreddit, contenedorId) {
+        fetch(`https://www.reddit.com/r/${subreddit}.json`)
+            .then(response => response.json())
+            .then(data => {
+                const posts = data.data.children;
+                const contenedor = document.getElementById(contenedorId);
+
+                contenedor.innerHTML = ''; // Limpiar el contenedor antes de cargar nuevos posts
+
+                posts.forEach(post => {
+                    const postElemento = document.createElement('div');
+                    postElemento.classList.add
+                    ('post');
+                    postElemento.innerHTML = `
+                        <h3>${post.data.title}</h3>
+                        <p>${post.data.selftext}</p>
+                        <a href="${post.data.url}" target="_blank">Ver en Reddit</a>
+                    `;
+                    contenedor.appendChild(postElemento);
+                });
+            })
+            .catch(error => console.error('Error al cargar noticias de Reddit:', error));
+    }
+
+    // Cargar noticias de Reddit al cargar la página
+    window.addEventListener('load', () => {
+        cargarNoticiasReddit('all', 'redditNoticias'); // Cargar noticias de Reddit al inicio
+    });
+</script>
+
+</body>
+</html>
