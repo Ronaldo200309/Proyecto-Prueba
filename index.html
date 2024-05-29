@@ -14,7 +14,7 @@
 
 <header>
     <div class="logo">
-        <img src="Imagenes/Logo.jpg">
+        <img src="Imagenes/Logo.jpg" alt="Logo">
     </div>
     <div class="brand">
         <h1>INFINITY NEWS</h1>
@@ -26,7 +26,7 @@
         <button onclick="scrollToSection('tecnologia')">Tecnología</button>
         <button onclick="scrollToSection('cine')">Cine</button>
         <button onclick="scrollToSection('entretenimiento')">Entretenimiento</button>
-        <button onclick="scrollToSection('reddit')">Reddit</button>
+        <button onclick="scrollToSection('reddit')">Noticias</button>
         <button onclick="scrollToSection('clima')">Clima</button>
     </div>
 </header>
@@ -77,8 +77,8 @@
 
     <!-- Sección para mostrar noticias de Reddit -->
     <section id="reddit">
-        <h2>Reddit</h2>
-        <p>Explora el universo de Reddit con las publicaciones más populares y curiosas.</p>
+        <h2>Noticias</h2>
+        <p>Explora el universo noticias con las publicaciones más populares y curiosas.</p>
         <div id="redditNoticias" class="noticias-container">
             <!-- Contenido de noticias de Reddit -->
         </div>
@@ -87,7 +87,7 @@
     <!-- Sección para mostrar información del clima -->
     <section id="clima">
         <h2>Clima</h2>
-        <p>Consulta el clima actual en tu ciudad.</p>
+        <p>Consulta el clima actual en Guatemala.</p>
         <div id="climaInfo" class="noticias-container">
             <!-- Contenido de información del clima -->
         </div>
@@ -97,8 +97,9 @@
 <footer>
     <div id="contacto">
         <h3>Contactos</h3>
-        <p>Teléfono: 7980-5469</p>
-        <p>Correo electrónico: construcOriente@gmail.com.gt</p>
+        <p>Teléfono: 6770-6489</p>
+        <p>Correo electrónico: newsinfinity@gmail.com.gt</p>
+        <p>&copy; 2024.Todos los derechos reservados.</p>
     </div>
     <div class="redes-sociales">
         <h3>Síguenos en redes sociales:</h3>
@@ -118,38 +119,9 @@
         section.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Función para cargar noticias desde la API de News
-    function cargarNoticias(categoria, contenedorId) {
-        fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${categoria}&apiKey=your-news-api-key`)
-            .then(response => response.json())
-            .then(data => {
-                const noticias = data.articles;
-                const contenedor = document.getElementById(contenedorId);
 
-                contenedor.innerHTML = ''; // Limpiar el contenedor antes de cargar nuevas noticias
-
-                noticias.forEach(noticia => {
-                    const noticiaElemento = document.createElement('div');
-                    noticiaElemento.classList.add('noticia');
-                    noticiaElemento.innerHTML = `
-                        <h3>${noticia.title}</h3>
-                        <p>${noticia.description}</p>
-                        <a href="${noticia.url}" target="_blank">Leer más</a>
-                    `;
-                    contenedor.appendChild(noticiaElemento);
-                });
-            })
-            .catch(error => console.error('Error al cargar noticias:', error));
-    }
-
-    // Cargar noticias al cargar la página
-    window.addEventListener('load', () => {
-        cargarNoticias('sports', 'deportesNoticias'); // Cargar noticias de deportes al inicio
-        cargarNoticias('technology', 'tecnologiaNoticias'); // Cargar noticias de tecnología al inicio
-        // Puedes cargar más categorías aquí si lo deseas
-    });
-
-    // Cargar noticias de Reddit
+    
+    // Función para cargar noticias de Reddit
     function cargarNoticiasReddit(subreddit, contenedorId) {
         fetch(`https://www.reddit.com/r/${subreddit}.json`)
             .then(response => response.json())
@@ -178,34 +150,37 @@
         cargarNoticiasReddit('all', 'redditNoticias'); // Cargar noticias de Reddit al inicio
     });
 
-    // Función para cargar información del clima desde la API de OpenWeatherMap
-    function cargarClima(ciudad, contenedorId) {
-        const apiKey = 'your-openweather-api-key'; // Reemplaza con tu API key de OpenWeatherMap
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&units=metric&lang=es&appid=${apiKey}`)
-            .then(response => response.json())
-            .then(data => {
-                const contenedor = document.getElementById(contenedorId);
+// Función para cargar información del clima desde la API de OpenWeatherMap
+function cargarClima(ciudad, contenedorId) {
+    const apiKey = '02a972ab5507abbd7378d5be3c842834'; // API key de OpenWeatherMap
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&units=metric&lang=es&appid=${apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            const contenedor = document.getElementById(contenedorId);
 
-                contenedor.innerHTML = ''; // Limpiar el contenedor antes de cargar nueva información
+            contenedor.innerHTML = ''; // Limpiar el contenedor antes de cargar nueva información
 
-                const climaElemento = document.createElement('div');
-                climaElemento.classList.add('clima');
-                climaElemento.innerHTML = `
-                    <h3>${data.name}, ${data.sys.country}</h3>
-                    <p>Temperatura: ${data.main.temp}°C</p>
-                    <p>Clima: ${data.weather[0].description}</p>
-                    <p>Humedad: ${data.main.humidity}%</p>
-                    <p>Viento: ${data.wind.speed} m/s</p>
-                `;
-                contenedor.appendChild(climaElemento);
-            })
-            .catch(error => console.error('Error al cargar información del clima:', error));
-    }
+            const climaElemento = document.createElement('div');
+            climaElemento.classList.add('clima');
+            climaElemento.innerHTML = `
+                <h3>${data.name}, ${data.sys.country}</h3>
+                <p>Temperatura: ${data.main.temp}°C</p>
+                <p>Clima: ${data.weather[0].description}</p>
+                <p>Humedad: ${data.main.humidity}%</p>
+                <p>Viento: ${data.wind.speed} m/s</p>
+            `;
+            contenedor.appendChild(climaElemento);
+        })
+        .catch(error => console.error('Error al cargar información del clima:', error));
+}
 
-    // Cargar información del clima al cargar la página
-    window.addEventListener('load', () => {
-        cargarClima('Ciudad de Guatemala', 'climaInfo'); // Cargar el clima de Ciudad de Guatemala al inicio
-    });
+// Cargar información del clima al cargar la página y actualizar cada 30 minutos
+window.addEventListener('load', () => {
+    cargarClima('Ciudad de Guatemala', 'climaInfo'); // Cargar el clima de Ciudad de Guatemala al inicio
+    setInterval(() => {
+        cargarClima('Ciudad de Guatemala', 'climaInfo'); // Actualizar el clima cada 30 minutos
+    }, 30 * 60 * 1000); // 30 minutos en milisegundos
+});
 </script>
 
 </body>
