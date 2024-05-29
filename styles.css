@@ -86,12 +86,14 @@ section p {
 
 /* Pie de página */
 footer {
-    display: flex;
+    background-color: #446ffc; /* Fondo del footer en color */
+    color: white; /* Texto del footer en color blanco */
+    padding: 20px; /* Padding interno del footer */
+    display: flex; /* Usa flexbox para la disposición del footer */
+    justify-content: space-between; /* Espacia los elementos en los extremos */
+    align-items: center; /* Alinea verticalmente los elementos al centro */
 }
-footer .redes-sociales ul {
-    padding: 0; /* Elimina el relleno predeterminado */
-    margin: 0; /* Elimina el margen predeterminado */
-}
+
 
 footer .redes-sociales ul li {
     display: inline; /* Muestra los elementos de las redes sociales en línea */
